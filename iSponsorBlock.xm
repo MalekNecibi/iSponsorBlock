@@ -140,6 +140,9 @@ void currentVideoTimeDidChange(YTPlayerViewController *self, YTSingleVideoTime *
                 [self isb_scrubToTime:self.currentVideoTotalMediaTime];
                 if (kEnableSkipCountTracking) [SponsorBlockRequest viewedVideoSponsorTime:sponsorSegment];
             }
+            else if ([self isMDXActive]) {
+                // bugfix: SmartTube SponsorBlock infinite loop
+            }
             else {
                 [self isb_scrubToTime:sponsorSegment.endTime];
                 if (kEnableSkipCountTracking) [SponsorBlockRequest viewedVideoSponsorTime:sponsorSegment];
