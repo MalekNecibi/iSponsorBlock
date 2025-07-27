@@ -136,11 +136,11 @@ void currentVideoTimeDidChange(YTPlayerViewController *self, YTSingleVideoTime *
                 }
             }
             //edge case where segment end time is longer than the video
-            else if (sponsorSegment.endTime > self.currentVideoTotalMediaTime) {
+            else if (sponsorSegment.endTime + 0.1 > self.currentVideoTotalMediaTime) {
                 [self isb_scrubToTime:self.currentVideoTotalMediaTime];
                 if (kEnableSkipCountTracking) [SponsorBlockRequest viewedVideoSponsorTime:sponsorSegment];
             }
-            else if ([self isMDXActive]) {
+            else if (self.currentSponsorSegment >= self.skipSegments.count-1 && arg2.time + 0.5 > sponsorSegment.endTime && [self isMDXActive]) {
                 // bugfix: SmartTube SponsorBlock infinite loop
             }
             else {
